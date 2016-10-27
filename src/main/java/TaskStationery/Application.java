@@ -1,5 +1,8 @@
 package TaskStationery;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Application {
 
 	public static void main(String[] args) {
@@ -19,13 +22,34 @@ public class Application {
 		engineer.addStationary(notebook);
 		engineer.addStationary(ballpen);
 		engineer.addStationary(paperForPrinter);
-		engineer.addStationary(gelPen);
+		engineer.addStationary(notebook);
 		engineer.addStationary(pencil);
+		engineer.addStationary(gelPen);
+
 		engineer.addStationary(paperForPrinter);
 
-		double sumOfStationery = calculateService.calculateAllStationeryCost(engineer);
+		double sumOfAllStationery = calculateService.calculateAllStationeryCost(engineer);
 
-		System.out.println("Total cost " + engineer.getName() + "'s" + " stationery = " + sumOfStationery);
+		System.out.println("Total cost " + engineer.getName() + "'s" + " stationery = " + sumOfAllStationery);
 
+		List<Stationery> stationaries = engineer.getStationaries();
+
+		Collections.sort(stationaries, new SortingByTitle());
+		System.out.println("\nSorting by title: ");
+		for (Stationery statn : stationaries) {
+			System.out.println(
+					"Title: " + statn.getTitle() + " , price for one: " + statn.getPrice() + ", " + engineer.getName() + 
+					" has " + statn.getCount() + " " + statn.getTitle());
+			 
+		}
+
+		Collections.sort(stationaries, new SortingByPrice());
+		System.out.println("\nSorting by price: ");
+		for (Stationery statn : stationaries) {
+			System.out.println(
+					"Price: " + statn.getPrice() + " for one " + statn.getTitle() + ", " + engineer.getName() + 
+					" has " + statn.getCount() + " " + statn.getTitle());
+
+		}
 	}
 }

@@ -24,24 +24,24 @@ public class Worker {
 		this.name = name;
 	}
 
-	boolean empty = stationaries.isEmpty();
-
 	public void addStationary(Stationery stationery) {
-		if (empty = true) {
+		if (stationaries.isEmpty()) {
 			stationaries.add(stationery);
 		} else {
+			boolean addStationary = true;
 			for (Stationery item : stationaries) {
-				if (item.getTitle().equals(stationery.getTitle())) {
+				boolean isTitleEqual = item.getTitle().equals(stationery.getTitle());
+				if (isTitleEqual) {
 					int itemCount = item.getCount();
 					int stationeryCount = stationery.getCount();
 					itemCount += stationeryCount;
 					item.setCount(itemCount);
-				} else {
-					stationaries.add(stationery);
+					addStationary = false;
 				}
 			}
-
+			if (addStationary) {
+				stationaries.add(stationery);
+			}
 		}
 	}
-
 }
